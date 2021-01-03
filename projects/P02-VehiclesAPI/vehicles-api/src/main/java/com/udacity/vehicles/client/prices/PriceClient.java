@@ -30,12 +30,14 @@ public class PriceClient {
      *   error message that the vehicle ID is invalid, or note that the
      *   service is down.
      */
+    //changed path from "services/price" to "prices" because Pricing service is
+    // now a microservice and controller is no longer used
     public String getPrice(Long vehicleId) {
         try {
             Price price = client
                     .get()
                     .uri(uriBuilder -> uriBuilder
-                            .path("services/price/")
+                            .path("/prices/")
                             .queryParam("vehicleId", vehicleId)
                             .build()
                     )
