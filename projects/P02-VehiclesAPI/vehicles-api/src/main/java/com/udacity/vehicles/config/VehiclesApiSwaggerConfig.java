@@ -21,7 +21,7 @@ public class VehiclesApiSwaggerConfig {
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
                 .build()
-                .useDefaultResponseMessages(false)
+                .useDefaultResponseMessages(true)
                 .apiInfo(apiInfo());
     }
 
