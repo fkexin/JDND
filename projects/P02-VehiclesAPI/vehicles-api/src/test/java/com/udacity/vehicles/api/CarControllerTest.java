@@ -131,6 +131,22 @@ public class CarControllerTest {
         verify(carService, times(1)).findById((long) 1);
     }
 
+
+    @Test
+    public void updateCar() throws Exception {
+        Car car = carService.findById(1L);
+        System.out.println("car body: " + car.getDetails().getBody() + " changing body");
+        car.getDetails().setBody("suv");
+        System.out.println("car body: " + car.getDetails().getBody());
+        mvc.perform(
+                put(new URI("/cars/1"))
+                        .content(json.write(car).getJson())
+                        .contentType(MediaType.APPLICATION_JSON_UTF8)
+                        .accept(MediaType.APPLICATION_JSON_UTF8))
+                        .andExpect(MockMvcResultMatchers
+                                .jsonPath("$.details.body").value(car.getDetails().getBody()));
+    }
+
     /**
      * Tests the deletion of a single car by ID.
      * @throws Exception if the delete operation of a vehicle fails
